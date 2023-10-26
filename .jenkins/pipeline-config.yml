@@ -1,4 +1,4 @@
-token: MEV_CI_DOCS
+token: 
 label: component-ci-nodes
 dockerImage: ubuntu:latest
 
