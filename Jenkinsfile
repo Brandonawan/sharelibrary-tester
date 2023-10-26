@@ -1,2 +1,2 @@
-@Library('projectOne-pipeline-library')_
-test()
+@Library('projectOne-pipeline-library') _
+findConfigFiles()
