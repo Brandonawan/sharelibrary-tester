@@ -1,6 +1,6 @@
-token: 
+token: MEV_CI_DOCS
 label: component-ci-nodes
-dockerImage: ubuntu:latest
+dockerImage: 
 
 scmCheckoutStrategies: 
   - strategy-name: repo-tool-with-gh-token
