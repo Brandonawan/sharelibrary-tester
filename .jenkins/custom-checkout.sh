@@ -1,34 +1,17 @@
 #!/bin/bash
 
-# This script checks out the source code from the provided Git repository using the default workspace directory.
+# Define the target directory as the current directory
+target_directory=$(pwd)
 
-# Define your Git repository URL
-repository_url="git@github.com:Brandonawan/shared-library.git"
+# Define the Git repository URL
+repository_url="git@github.com:Brandonawan/sharelibrary-tester.git"
 
-# Use the Jenkins default workspace directory
-target_directory="$WORKSPACE"
+# Clone the Git repository in the current directory
+git clone "$repository_url"
 
-# Define the branch, tag, or commit you want to checkout
-branch_or_tag="main"
-
-# Check if the target directory is empty (no existing Git repo)
-if [ -z "$(ls -A "$target_directory")" ]; then
-  # If it's empty, perform a fresh Git clone
-  git clone "$repository_url" "$target_directory"
+# Check if the clone was successful
+if [ $? -eq 0 ]; then
+  echo "Repository cloned successfully in $target_directory"
 else
-  # If it's not empty, ensure it's a Git repository and fetch the latest changes
-  if [ -d "$target_directory/.git" ]; then
-    git -C "$target_directory" fetch origin
-  else
-    echo "The target directory is not a Git repository. Initialize it as a Git repository first."
-    exit 1
-  fi
+  echo "Failed to clone the repository"
 fi
-
-# Check out the specified branch, tag, or commit
-git -C "$target_directory" checkout "$branch_or_tag"
-
-# Optional: Update submodules if your repository uses them
-# git -C "$target_directory" submodule update --init --recursive
-
-echo "Source code checked out in $target_directory on branch/tag/commit: $branch_or_tag"
